@@ -14,6 +14,83 @@ function getTitle(){
     )
 }
 
+function getTable (model) {
+    const {leftValue} = model
+    const {leftUnit} = model
+    const {rightValue} = model
+    const {rightUnit} = model
+    return[
+        {
+            'leftValue': leftValue,
+            'leftUnit': leftUnit,
+            'rightValue': rightValue,
+            'rightUnit': rightUnit
+        }
+    ]
+}
+
+function inputForm(model){
+    const {input1} = model
+    const message1 = 'Left temperature is source?'
+    const {input2} = model
+    const message2 = 'Temperature value to convert?'
+    return inquirer.prompt([
+        {
+            name: 'input1',
+            type: 'input',
+            message: message1,
+            default: input1,
+            validate: function(value){
+                if(value === 'y' || value === 'n'){
+                    return true
+                } else {
+                    return 'Enter y or n'
+                }
+            } 
+        },
+        {
+            name: 'input2',
+            type: 'input',
+            message: message2,
+            default: input2,
+        }
+    ])
+}
+
+function listForm(model){
+    const {leftUnit} = model
+    const message1 = 'From?'
+    const {rightUnit} = model
+    const message2 = 'To?'
+    const choices = ['Celsius', 'Fahrenheit', 'Kelvin']
+    return inquirer.prompt([
+        {
+            name: 'leftUnit',
+            type: 'input',
+            message: message1,
+            default: leftUnit,
+            choices: choices
+        },
+        {
+            name: 'rightUnit',
+            type: 'input',
+            message: message2,
+            default: rightUnit,
+            choices: choices
+        }
+
+    ])
+}
+
+function view(model){
+    return{
+       title: getTitle(),
+       table: getTable(model)
+    }
+}
 module.exports = {
-    getTitle
+    view,
+    inputForm,
+    getTitle,
+    listForm
 }
