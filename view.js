@@ -58,24 +58,22 @@ function inputForm(model){
 }
 
 function listForm(model){
-    const {leftUnit} = model
+    const {input3} = model
     const message1 = 'From?'
-    const {rightUnit} = model
+    const {input4} = model
     const message2 = 'To?'
     const choices = ['Celsius', 'Fahrenheit', 'Kelvin']
     return inquirer.prompt([
         {
-            name: 'leftUnit',
-            type: 'input',
+            name: 'input3',
+            type: 'list',
             message: message1,
-            default: leftUnit,
             choices: choices
         },
         {
-            name: 'rightUnit',
-            type: 'input',
+            name: 'input4',
+            type: 'list',
             message: message2,
-            default: rightUnit,
             choices: choices
         }
 
